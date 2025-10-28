@@ -1,0 +1,18 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div class="container mx-auto px-4 py-8">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">📄 RAG AI Query App</h1>
+      <p class="text-gray-600">Upload any PDF document and query all your uploaded data using RAG AI Agent</p>
+    </header>
+
+    <div class="max-w-4xl mx-auto space-y-8">
+      <app-file-upload />
+      
+      <div class="border-t-2 border-gray-300 my-8"></div>
+      
+      <app-query-form (resultReady)="onResultReady($event)" />
+      
+      <app-results-display [result]="queryResult()" />
+    </div>
+  </div>
+</div>

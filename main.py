@@ -156,15 +156,17 @@ async def api_query_pdf(request: QueryPDFRequest):
     }
     
     # Send event to Inngest
-    await inngest_client.send(inngest.Event(
+    query_result_array = await inngest_client.send(inngest.Event(
         name="rag/query_pdf_ai",
         data=event_data
     ))
     
     return {
+        "event_id": query_result_array[0] if query_result_array else "",
         "message": "PDF query started",
         "question": request.question,
         "top_k": request.top_k
+        
     }
 
 inngest.fast_api.serve(app, inngest_client, [rag_ingest_pdf, rag_query_pdf_ai])

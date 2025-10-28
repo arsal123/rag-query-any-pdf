@@ -1,0 +1,39 @@
+1. Analyze the codebase structure and key files
+Read and analyze the following files to understand the architecture:
+- `main.py` - FastAPI app with Inngest functions and REST endpoints
+- `data_loader.py` - PDF processing and embedding logic
+- `vector_db.py` - Qdrant vector database wrapper
+- `custom_types.py` - Pydantic models for type safety
+- `pyproject.toml` - Dependencies and project configuration
+- `frontend/README.md` - Documentation for Angular Frontend app. Don't do any further work on information regarding frontend. Refer this readme for Frontend app details 
+- `README.md` - Set of commands used to run this app
+2. Replace current `README.md` with the project documentation as described below
+- Don't document anything about streamlit_app.py. Ignore this file. 
+3. Document the event-driven architecture
+Describe the high-level system architecture including:
+- How Inngest orchestrates the event-driven workflow
+- The two main Inngest functions (`rag_ingest_pdf` and `rag_query_pdf_ai`) and their step-by-step workflows
+- How REST API endpoints trigger Inngest events
+- The three core apps that run concurrently (FastAPI, Inngest, Angular)
+- The data flow from PDF upload through embedding, vector storage, and retrieval
+4. Document key components and their responsibilities
+Explain the purpose and functionality of each main module:
+- `main.py`: FastAPI application with Inngest function definitions and REST API endpoints
+- `data_loader.py`: PDF reading, text chunking, and OpenAI embedding generation
+- `vector_db.py`: Qdrant vector database operations wrapper
+- `custom_types.py`: Pydantic models for request/response type safety
+5. In configuration and technical details. Include important configuration and technical specifications:
+- Required `.env` file with `OPENAI_API_KEY`
+- OpenAI embedding model details (text-embedding-3-large, 3072 dimensions)
+- Text chunking parameters (chunk size: 1000, overlap: 200)
+- Rate limiting and throttling implementation for ingestion
+- Angular polling mechanism for Inngest API results
+6. Create the WARP.md file and README.md file
+Write the complete WARP.md file with:
+1. Required header text
+2. Commands section with all necessary development commands
+3. Architecture overview explaining the event-driven system
+4. Key components section describing each module's role
+5. Configuration section noting environment requirements
+6. Development notes with technical implementation details
+Write in READMD.md file what you think is important.

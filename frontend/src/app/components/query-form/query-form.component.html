@@ -1,0 +1,62 @@
+<div class="bg-white rounded-lg shadow-md p-6 mb-8">
+  <h2 class="text-2xl font-bold mb-4 text-gray-800">Ask a question about your uploaded data</h2>
+  
+  <form (ngSubmit)="submitQuery()" class="space-y-4">
+    <div class="flex flex-col space-y-2">
+      <label for="question" class="block text-sm font-medium text-gray-700">
+        Your question
+      </label>
+      <input
+        id="question"
+        type="text"
+        [value]="question()"
+        (input)="onQuestionChange($any($event.target).value)"
+        [disabled]="isQuerying()"
+        placeholder="What would you like to know?"
+        class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+      />
+    </div>
+
+    <div class="flex flex-col space-y-2">
+      <label for="topK" class="block text-sm font-medium text-gray-700">
+        How many chunks to retrieve
+      </label>
+      <input
+        id="topK"
+        type="number"
+        [value]="topK()"
+        (input)="onTopKChange(+$any($event.target).value)"
+        [disabled]="isQuerying()"
+        min="1"
+        max="20"
+        step="1"
+        class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+      />
+      <span class="text-xs text-gray-500">Value between 1 and 20</span>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="!question().trim() || isQuerying()"
+      class="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+    >
+      @if (isQuerying()) {
+        <span class="flex items-center justify-center">
+          <svg class="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Generating answer...
+        </span>
+      } @else {
+        Ask
+      }
+    </button>
+
+    @if (queryError()) {
+      <div class="p-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
+        {{ queryError() }}
+      </div>
+    }
+  </form>
+</div>
