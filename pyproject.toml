@@ -1,7 +1,7 @@
 [project]
 name = "rag-query-any-pdf"
 version = "0.1.0"
-description = "Query any PDF document using RAG with Inngest, FastAPI, and LlamaIndex"
+description = "Upload and Query your data using fast RAG Agent with Inngest, FastAPI and Angular"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
