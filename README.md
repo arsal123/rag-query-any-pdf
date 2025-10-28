@@ -4,7 +4,7 @@ vector database, and Angular 20.
 
 ## Features
 
-- 📄 **PDF Ingestion**: Upload and process PDF documents into searchable vector embeddings. Database is local so your data is saved local and secure.
+- 📄 **PDF Ingestion**: Upload and process PDF documents into searchable vector embeddings. Used llama for chunking a big pdf document. Database is local so your data is saved local and secure.
 - 🤖 **AI-Powered Querying**: Ask questions and receive context-aware answers from your documents
 - ⚡ **Event-Driven Architecture**: Asynchronous processing using Inngest workflows
 - 🔍 **Vector Search**: Fast similarity search using Qdrant vector database
