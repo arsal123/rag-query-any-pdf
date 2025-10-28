@@ -7,7 +7,7 @@ An event-driven RAG (Retrieval-Augmented Generation) application that allows you
 - 🤖 **AI-Powered Querying**: Ask questions and receive context-aware answers from your documents
 - ⚡ **Event-Driven Architecture**: Asynchronous processing using Inngest workflows
 - 🔍 **Vector Search**: Fast similarity search using Qdrant vector database
-- 🎨 **Modern Frontend**: Angular 20 with Tailwind CSS
+- 🎨 **Modern Frontend**: Fast Angular 20 Zoneless app with Tailwind CSS
 - 🛡️ **Rate Limiting**: Built-in throttling and rate limiting for PDF ingestion
 
 ## Quick Start
