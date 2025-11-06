@@ -1,5 +1,5 @@
 import logging
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
 import inngest
 import inngest.fast_api
@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 import uuid
 import os
 import datetime
+import shutil
+from pathlib import Path
 from data_loader import load_and_chunk_pdf, embed_texts
 from vector_db import QdrantStorage
 from custom_types import RAGChunkAndSrc, RAGUpsertResult, RAGSearchResult, RAQQueryResult
@@ -86,7 +88,7 @@ async def rag_query_pdf_ai(ctx: inngest.Context):
 
     adapter = ai.openai.Adapter(
         auth_key=os.getenv("OPENAI_API_KEY"),
-        model="gpt-4o-mini"
+        model=os.getenv("MODEL") or "gpt-4o-mini"
     )
 
     res = await ctx.step.ai.infer(
@@ -143,6 +145,52 @@ async def api_ingest_pdf(request: IngestPDFRequest):
         "message": "PDF ingestion started",
         "pdf_path": request.pdf_path,
         "source_id": event_data["source_id"]
+    }
+
+
+@app.post("/rag/file-upload")
+async def upload_file(file: UploadFile = File(...)):
+    pass
+
+
+
+@app.post("/rag/ingest-pdf-file")
+async def api_ingest_pdf_file(file: UploadFile = File(...)):
+    """
+    Upload a PDF file and trigger ingestion workflow
+    """
+    # Validate file type
+    if not file.filename.endswith('.pdf'):
+        return {
+            "error": "Only PDF files are allowed",
+            "filename": file.filename
+        }
+    
+    # Create uploads directory if it doesn't exist
+    uploads_dir = Path("uploads")
+    uploads_dir.mkdir(exist_ok=True)
+    
+    # Save the uploaded file
+    file_path = uploads_dir / file.filename
+    with file_path.open("wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    
+    # Trigger ingestion event
+    event_data = {
+        "pdf_path": str(file_path),
+        "source_id": file.filename
+    }
+    
+    await inngest_client.send(inngest.Event(
+        name="rag/ingest_pdf",
+        data=event_data
+    ))
+    
+    return {
+        "message": "PDF file uploaded and ingestion started",
+        "filename": file.filename,
+        "pdf_path": str(file_path),
+        "source_id": file.filename
     }
 
 @app.post("/rag/query-pdf")

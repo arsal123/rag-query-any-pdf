@@ -43,7 +43,7 @@ export class FileUploadComponent {
     this.uploadError.set('');
     this.uploadMessage.set('');
 
-    this.ragService.uploadPDF(file).subscribe({
+    this.ragService.uploadPDFWithFile(file).subscribe({
       next: (response) => {
         this.isUploading.set(false);
         this.uploadMessage.set(`Triggered ingestion for: ${file.name}`);

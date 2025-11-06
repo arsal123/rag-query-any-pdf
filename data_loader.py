@@ -29,3 +29,7 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
 
 
     
+def load_full_file():
+    pass
+
+# def load_full_file*()

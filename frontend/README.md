@@ -268,7 +268,7 @@ When contributing to this project:
 
 ## License
 
-This project is part of the RAG PDF Query system.
+This project is part of the RAG Data Query system.
 
 ## Support
 
