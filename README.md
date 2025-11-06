@@ -1,9 +1,10 @@
 # RAG Data Query System
-An event-driven RAG (Retrieval-Augmented Generation) application that allows you to upload PDF documents and query them using AI. Built with FastAPI, Inngest, Qdrant vector database, and Angular 20.
+An event-driven RAG (Retrieval-Augmented Generation) agent application that allows you to upload your data using PDF documents in a Qdrant vector database and query it using an AI Agent. You can change the model as per your preference. Built with FastAPI, Inngest, Qdrant 
+vector database, and Angular 20.
 
 ## Features
 
-- 📄 **PDF Ingestion**: Upload and process PDF documents into searchable vector embeddings
+- 📄 **PDF Ingestion**: Upload and process PDF documents into searchable vector embeddings. Used llama for chunking a big pdf document.
 - 🤖 **AI-Powered Querying**: Ask questions and receive context-aware answers from your documents
 - ⚡ **Event-Driven Architecture**: Asynchronous processing using Inngest workflows
 - 🔍 **Vector Search**: Fast similarity search using Qdrant vector database
